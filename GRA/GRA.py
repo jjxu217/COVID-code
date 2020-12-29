@@ -1,11 +1,14 @@
 from pyomo.pysp.annotations import StochasticConstraintBoundsAnnotation
-from GRbasemodel import model
+from GRAbasemodel import model
 model.stoch_rhs = StochasticConstraintBoundsAnnotation()
 
 model.stoch_rhs.declare(model.dummy_d)
+model.stoch_rhs.declare(model.dummy_d_k)
 
 num_scenarios = 1
-scenario_data = {'Scenario1' : tuple(model.demand_table[j, t][0] for j in model.state_set for t in model.time_set)}
+one_secnario_data = ([0 for j in model.state_set for t in model.time0_set],\
+    [0 for j in model.state_set for t in model.time1_set for k in model.K_set])
+scenario_data = {'Scenario1' : one_secnario_data}
 
 def pysp_scenario_tree_model_callback():
     from pyomo.pysp.scenariotree.tree_structure_model import \
@@ -43,11 +46,18 @@ def pysp_instance_creation_callback(scenario_name, node_names):
 
     instance = model.clone()
 
-    demands = scenario_data[scenario_name]
+    demands, demands_k = scenario_data[scenario_name]
     i = 0
     for j in instance.state_set:
-        for t in instance.time_set:
+        for t in instance.time0_set:
             instance.demand[j, t].value = demands[i]
             i += 1
+    
+    i = 0
+    for j in instance.state_set:
+        for t in instance.time1_set:
+            for k in instance.K_set:
+                instance.demand_k[j, t, k].value = demands_k[i]
+                i += 1
 
     return instance
