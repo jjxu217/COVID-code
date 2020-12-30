@@ -7,6 +7,7 @@ from collections import defaultdict
 from pyomo.opt import SolverFactory
 from datetime import timedelta
 from datetime import datetime
+import time
 
 
 now = datetime.now()
@@ -22,7 +23,7 @@ first_date = '2020/03/25'
 t = 7
 T = 14
 P = 10
-lbd = 0.1
+lbd = 5
 S = 51
 
 SNS_stock = 0
@@ -59,13 +60,14 @@ for n in range(S):
     idx += 1
 
 
-def solve_model(original_data, date):
+def solve_model(date):
     ##########
     ## original_data:DataFram, contains initial info
     ## date:datatime format
     ##########
 
-    data = original_data.copy(deep=True)
+    prev_date = date - timedelta(t)
+    data = pd.read_csv('{}/{}.csv'.format(now, prev_date.strftime('%m%d')), header=0, index_col=0)
     model = ConcreteModel()
 
     #Sets
@@ -81,12 +83,11 @@ def solve_model(original_data, date):
     ini_nb = defaultdict(list)
     for i in range(S):
         ini_nb[i] = eval(data.loc[i, 'stock_nb'])
-    #ini_SNS = [round(i) for i in data['stock_sns']]
 
     # Parameters
     model.demand = Param(model.state_set, model.time_set, within=NonNegativeReals, mutable=True)
 
-    model.U = [round(flow_bound_ratio * ini_self[flow_mapping_rev[j][0]]) for j in model.flow_no_sns_set] + [round(flow_bound_ratio * init_ratio * SNS_stock) for _ in range(S)]
+    model.U = [round(flow_bound_ratio * ini_self[flow_mapping_rev[j][0]]) for j in model.flow_set] 
     model.G = [round(stock_bound_ratio * i) for i in ini_self]
 
     for i in range(S):
@@ -102,21 +103,19 @@ def solve_model(original_data, date):
     model.delta = Var(model.state_set, model.time_set, within=NonNegativeReals)
 
     #Constraints
-    model.stock_self = Constraint(model.state_set, rule=lambda model, j: model.s0[j] + sum(model.x[flow_mapping[(j, i)]] for i in out_flow[j]) == ini_self[j])
-    model.stock_SNS_self = Constraint(rule=lambda model: model.s0[51] + sum(model.s0_nb[flow_mapping[(51, i)]] for i in out_flow[51]) == init_ratio * SNS_stock)
-
+    model.stock_self = Constraint(model.state_set, rule=lambda model, j: model.s0[j] + sum(model.x[flow_mapping[(j, i)]] for i in out_flow[j]) - model.s0_nb[flow_mapping[(51, j)]]  == ini_self[j])
+    model.stock_SNS_self = Constraint(rule=lambda model: model.s0[51] + sum(model.s0_nb[flow_mapping[(51, i)]] for i in out_flow[51])  == ini_self[51])
+   
     model.stock_nb = ConstraintList()
     for j in model.state_set:
         for dum, i in enumerate(out_flow[j]):
             f = flow_mapping[(i, j)] 
             model.stock_nb.add(model.s0_nb[f] - model.x[f] == ini_nb[j][dum])
-        # f = flow_mapping[(51, j)] 
-        # model.stock_nb.add(model.s0_nb[f] - model.x[f] == ini_SNS[j])
             
     model.delta_bound = ConstraintList()
     for j in model.state_set:
         for tt in model.time_set:
-            total_stock = model.s0[j] + model.s0_nb[flow_mapping[(51, j)] ] + sum(model.s0_nb[flow_mapping[(i, j)]] for i in out_flow[j])
+            total_stock = model.s0[j] + sum(model.s0_nb[flow_mapping[(i, j)]] for i in out_flow[j])
             model.delta_bound.add(model.delta[j, tt] + total_stock >= model.demand[j, tt])
             
 
@@ -129,16 +128,19 @@ def solve_model(original_data, date):
 
     #Objective
     model.unmet = Expression(initialize=(sum(model.delta[s, tt] for s in model.state_set for tt in model.time_set)))
-    model.penalty = Expression(initialize=(sum(lbd*model.s0_nb[i] for i in model.flow_no_sns_set)))
+    model.penalty = Expression(initialize=(sum(lbd*model.s0_nb[i] for i in model.flow_set)))
     model.obj = Objective(expr = model.unmet + model.penalty, sense=minimize)
 
+    start_time = time.time()
     SolverFactory('cplex_direct').solve(model)
+    runing_time = time.time() - start_time
+    with open('{}/time_{}.csv'.format(now, date.strftime('%m%d')), 'w') as f:
+        f.write('Running time for {} is {}'.format(date.strftime('%m%d'), runing_time))
+
 
     #write result
-    data['stock_all'] = [0 for _ in range(S)] 
-    for i in model.state_set:
+    for i in model.state_p_set:
         data.loc[i, 'stock_self'] = round(model.s0[i].value)
-        data.loc[i, 'stock_all'] += data.loc[i, 'stock_self']
         
     for i in model.state_set:
         l = eval(data.loc[i, 'nb_idx'])
@@ -147,27 +149,27 @@ def solve_model(original_data, date):
             j = flow_mapping[(n, i)]
             new_nb.append(round(model.s0_nb[j].value))
         data.loc[i, 'stock_nb'] = str(new_nb)
-        data.loc[i, 'stock_all'] += sum(new_nb)
+        
 
     for i in model.state_set:
         j = flow_mapping[(51, i)]
-        data.loc[i, 'stock_sns'] = round(model.s0_nb[j].value)
-        data.loc[i, 'stock_all'] += data.loc[i, 'stock_sns']
+        data.loc[i, 'stock_sns'] += round(model.s0_nb[j].value)
 
     data.to_csv(now + '/' + date.strftime('%m%d') + '.csv')
-    return data.copy(deep=True)
+    
 
 
 #solve the first period
 ##first iteration values
+prev_date = pd.to_datetime(first_date) - timedelta(t)
 data = raw.rename(columns={'Available capacity': "stock_self"})
-data['stock_self'] = init_ratio * data['stock_self']
+data['stock_self'] = round(init_ratio * data['stock_self'])
 data['stock_nb'] = None
 for i in range(S):
     data.loc[i, 'stock_nb'] = str([0 for _ in eval(data.loc[i, 'nb'])])
-data['stock_sns'] = [0 for _ in range(S)]
+data['stock_sns'] = [0 for _ in range(S+1)]
+data.to_csv(now + '/' + prev_date.strftime('%m%d') + '.csv')
 
-data = solve_model(data, pd.to_datetime(first_date))
-for i in range(1, P):
+for i in range(P):
     date = pd.to_datetime(first_date) + timedelta(i * t)
-    data = solve_model(data, date)
+    solve_model(date)

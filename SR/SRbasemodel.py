@@ -78,7 +78,7 @@ for i in range(S):
 # Parameters
 model.demand = Param(model.state_set, model.time_set, within=NonNegativeReals, mutable=True)
 
-model.U = [round(flow_bound_ratio * ini_self[flow_mapping_rev[j][0]]) for j in model.flow_no_sns_set] + [round(flow_bound_ratio * init_ratio * SNS_stock) for _ in range(S)]
+model.U = [round(flow_bound_ratio * ini_self[flow_mapping_rev[j][0]]) for j in model.flow_set] 
 model.G = [round(stock_bound_ratio * i) for i in ini_self]
 
 # first-stage variables
@@ -93,7 +93,7 @@ model.dummy = Var(model.state_set, model.time_set, within=NonNegativeReals)
 # model.mu = Var(model.state_set, within=NonNegativeReals)
 
 # always define the objective as the sum of the stage costs
-model.FirstStageCost = Expression(initialize=(sum(lbd*model.s0_nb[i] for i in model.flow_no_sns_set)))
+model.FirstStageCost = Expression(initialize=(sum(lbd*model.s0_nb[i] for i in model.flow_set)))
 model.SecondStageCost = \
     Expression(initialize=(sum(model.delta[s, t] for s in model.state_set for t in model.time_set)))
 
@@ -102,18 +102,14 @@ model.obj = Objective(expr=model.FirstStageCost + model.SecondStageCost)
 
 
 # first stage constraints
-model.stock_self = Constraint(model.state_set, rule=lambda model, j: model.s0[j] + sum(model.x[flow_mapping[(j, i)]] for i in out_flow[j]) == ini_self[j])
-model.stock_SNS_self = Constraint(rule=lambda model: model.s0[51] + sum(model.s0_nb[flow_mapping[(51, i)]] for i in out_flow[51]) == init_ratio * SNS_stock)
+model.stock_self = Constraint(model.state_set, rule=lambda model, j: model.s0[j] + sum(model.x[flow_mapping[(j, i)]] for i in out_flow[j]) - model.s0_nb[flow_mapping[(51, j)]]  == ini_self[j])
+model.stock_SNS_self = Constraint(rule=lambda model: model.s0[51] + sum(model.s0_nb[flow_mapping[(51, i)]] for i in out_flow[51]) == ini_self[51])
 
 model.stock_nb = ConstraintList()
 for j in model.state_set:
     for dum, i in enumerate(out_flow[j]):
         f = flow_mapping[(i, j)] 
         model.stock_nb.add(model.s0_nb[f] - model.x[f] == ini_nb[j][dum])
-    # f = flow_mapping[(51, j)] 
-    # model.stock_nb.add(model.s0_nb[f] - model.x[f] == ini_SNS[j])
-        
-
         
 
 model.s0_bound = Constraint(model.state_set, \
@@ -128,7 +124,7 @@ model.s0_nb_bound = Constraint(list(range(F - S, F)), \
 model.delta_bound = ConstraintList()
 for j in model.state_set:
     for tt in model.time_set:
-        total_stock = model.s0[j] + model.s0_nb[flow_mapping[(51, j)] ] + sum(model.s0_nb[flow_mapping[(i, j)]] for i in out_flow[j])
+        total_stock = model.s0[j] + sum(model.s0_nb[flow_mapping[(i, j)]] for i in out_flow[j])
         model.delta_bound.add(model.delta[j, tt] + total_stock - model.dummy[j, tt] >= 0)
 
 # 
