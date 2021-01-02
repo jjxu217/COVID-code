@@ -1,5 +1,0 @@
-TIME GRA_0506
-PERIODS IMPLICIT
-    s0(0) obj TIME1
-    delta(0_1) c_e_dummy_d(0_1)_ TIME2
-ENDATA
