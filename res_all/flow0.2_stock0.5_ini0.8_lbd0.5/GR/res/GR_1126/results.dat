@@ -40,10 +40,10 @@ First Stage Columns                    : 547
 Algorithm                              : Two-stage Stochastic Decomposition
 Number of iterations                   : 201
 Lower bound estimate                   : 103.112500
-Total time                             : 3.677841
-Total time to solve master             : 1.444215
-Total time to solve subproblems        : 0.145856
-Total time in argmax procedure         : 0.075027
+Total time                             : 3.870599
+Total time to solve master             : 1.542623
+Total time to solve subproblems        : 0.159919
+Total time in argmax procedure         : 0.079211
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
@@ -62,10 +62,10 @@ Replication-2
 Algorithm                              : Two-stage Stochastic Decomposition
 Number of iterations                   : 201
 Lower bound estimate                   : 104.037500
-Total time                             : 3.974871
-Total time to solve master             : 1.638206
-Total time to solve subproblems        : 0.159860
-Total time in argmax procedure         : 0.075368
+Total time                             : 3.574645
+Total time to solve master             : 1.429952
+Total time to solve subproblems        : 0.149445
+Total time in argmax procedure         : 0.069039
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
@@ -84,10 +84,10 @@ Replication-3
 Algorithm                              : Two-stage Stochastic Decomposition
 Number of iterations                   : 201
 Lower bound estimate                   : 101.695000
-Total time                             : 3.903986
-Total time to solve master             : 1.599320
-Total time to solve subproblems        : 0.155803
-Total time in argmax procedure         : 0.070458
+Total time                             : 4.076318
+Total time to solve master             : 1.670931
+Total time to solve subproblems        : 0.163306
+Total time in argmax procedure         : 0.073364
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
@@ -103,17 +103,17 @@ Number of observations                 : 2000
 
 s0(0)           : 26.461616
 s0(1)           : 160.000000
-s0(10)          : 2025.000000
+s0(10)          : 2004.000000
 s0(11)          : 427.000000
 s0(12)          : 224.000000
 s0(13)          : 323.000000
 s0(14)          : 1254.435354
 s0(15)          : 1542.000000
-s0(16)          : 225.000000
+s0(16)          : 228.000000
 s0(17)          : 1040.000000
 s0(18)          : 801.000000
-s0(19)          : 2243.000000
-s0(2)           : 930.000000
+s0(19)          : 2256.000000
+s0(2)           : 929.000000
 s0(20)          : 400.000000
 s0(21)          : 198.000000
 s0(22)          : 1851.453283
@@ -126,15 +126,15 @@ s0(28)          : 326.000000
 s0(29)          : 464.892003
 s0(3)           : 800.000000
 s0(30)          : 1200.000000
-s0(31)          : 2630.000000
+s0(31)          : 2626.000000
 s0(32)          : 504.000000
 s0(33)          : 670.000000
-s0(34)          : 5709.000000
+s0(34)          : 5711.000000
 s0(35)          : 2183.000000
 s0(36)          : 640.000000
 s0(37)          : 640.000000
 s0(38)          : 1760.000000
-s0(39)          : 350.000000
+s0(39)          : 352.000000
 s0(4)           : 1012.000000
 s0(40)          : 8829.000000
 s0(41)          : 404.892003
@@ -142,7 +142,7 @@ s0(42)          : 760.000000
 s0(43)          : 6993.000000
 s0(44)          : 576.000000
 s0(45)          : 2026.000000
-s0(46)          : 263.000000
+s0(46)          : 264.000000
 s0(47)          : 960.000000
 s0(48)          : 496.000000
 s0(49)          : 560.000000
@@ -150,10 +150,10 @@ s0(5)           : 144.000000
 s0(50)          : 480.000000
 s0(51)          : 352.000000
 s0(6)           : 0.000000
-s0(7)           : 1634.000000
-s0(8)           : 320.000000
+s0(7)           : 1639.000000
+s0(8)           : 319.000000
 s0(9)           : 3200.000000
-s0_nb(0)        : 910.000000
+s0_nb(0)        : 912.000000
 s0_nb(1)        : 0.000000
 s0_nb(10)       : 0.000000
 s0_nb(100)      : 0.000000

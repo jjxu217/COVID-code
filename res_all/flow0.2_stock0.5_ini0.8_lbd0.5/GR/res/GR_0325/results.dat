@@ -38,19 +38,19 @@ First Stage Columns                    : 547
 ------------------------------------------- Optimization -------------------------------------------
 
 Algorithm                              : Two-stage Stochastic Decomposition
-Number of iterations                   : 207
-Lower bound estimate                   : 4051.231084
-Total time                             : 5.167827
-Total time to solve master             : 1.844540
-Total time to solve subproblems        : 0.225632
-Total time in argmax procedure         : 0.287150
+Number of iterations                   : 201
+Lower bound estimate                   : 4022.100836
+Total time                             : 5.986210
+Total time to solve master             : 2.110641
+Total time to solve subproblems        : 0.271996
+Total time in argmax procedure         : 0.328142
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
 
-Upper bound estimate                   : 4022.850733
-Error in estimation                    : 0.000416
-Confidence interval at 95%             : [4022.014965, 4023.686501]
+Upper bound estimate                   : 4019.354099
+Error in estimation                    : 0.000750
+Confidence interval at 95%             : [4017.847184, 4020.861013]
 Number of observations                 : 2000
 
 ====================================================================================================================================
@@ -60,19 +60,19 @@ Replication-2
 ------------------------------------------- Optimization -------------------------------------------
 
 Algorithm                              : Two-stage Stochastic Decomposition
-Number of iterations                   : 237
-Lower bound estimate                   : 3896.863620
-Total time                             : 6.910010
-Total time to solve master             : 2.513289
-Total time to solve subproblems        : 0.263495
-Total time in argmax procedure         : 0.387001
+Number of iterations                   : 208
+Lower bound estimate                   : 3890.483382
+Total time                             : 5.827400
+Total time to solve master             : 2.152412
+Total time to solve subproblems        : 0.242561
+Total time in argmax procedure         : 0.303432
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
 
-Upper bound estimate                   : 3986.400896
-Error in estimation                    : 0.000625
-Confidence interval at 95%             : [3985.155400, 3987.646392]
+Upper bound estimate                   : 3951.666601
+Error in estimation                    : 0.000210
+Confidence interval at 95%             : [3951.251955, 3952.081247]
 Number of observations                 : 2000
 
 ====================================================================================================================================
@@ -83,25 +83,25 @@ Replication-3
 
 Algorithm                              : Two-stage Stochastic Decomposition
 Number of iterations                   : 201
-Lower bound estimate                   : 4099.450199
-Total time                             : 5.861525
-Total time to solve master             : 2.184880
-Total time to solve subproblems        : 0.251693
-Total time in argmax procedure         : 0.334768
+Lower bound estimate                   : 4101.127472
+Total time                             : 5.640820
+Total time to solve master             : 2.123676
+Total time to solve subproblems        : 0.238989
+Total time in argmax procedure         : 0.301200
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
 
-Upper bound estimate                   : 4042.352145
+Upper bound estimate                   : 4044.007914
 Error in estimation                    : 0.000652
-Confidence interval at 95%             : [4041.033623, 4043.670667]
+Confidence interval at 95%             : [4042.689521, 4045.326307]
 Number of observations                 : 2000
 
 ====================================================================================================================================
 
 ----------------------------------------- Compromise solution --------------------------------------
 
-s0(0)           : 33.267281
+s0(0)           : 20.856988
 s0(1)           : 160.000000
 s0(10)          : 1075.000000
 s0(11)          : 427.000000
@@ -111,12 +111,12 @@ s0(14)          : 1276.000000
 s0(15)          : 1542.000000
 s0(16)          : 134.000000
 s0(17)          : 1040.000000
-s0(18)          : 800.535150
+s0(18)          : 800.567966
 s0(19)          : 896.000000
 s0(2)           : 832.000000
 s0(20)          : 400.000000
 s0(21)          : 198.000000
-s0(22)          : 1861.248014
+s0(22)          : 1861.103659
 s0(23)          : 1107.000000
 s0(24)          : 1466.000000
 s0(25)          : 320.000000
@@ -126,7 +126,7 @@ s0(28)          : 326.000000
 s0(29)          : 480.000000
 s0(3)           : 800.000000
 s0(30)          : 1200.000000
-s0(31)          : 1335.411942
+s0(31)          : 1338.184397
 s0(32)          : 504.000000
 s0(33)          : 670.000000
 s0(34)          : 3680.000000
@@ -142,14 +142,14 @@ s0(42)          : 760.000000
 s0(43)          : 6993.000000
 s0(44)          : 576.000000
 s0(45)          : 2026.000000
-s0(46)          : 228.588162
+s0(46)          : 231.259186
 s0(47)          : 960.000000
 s0(48)          : 496.000000
 s0(49)          : 560.000000
 s0(5)           : 144.000000
 s0(50)          : 480.000000
 s0(51)          : 352.000000
-s0(6)           : 6531.216732
+s0(6)           : 6527.884793
 s0(7)           : 640.000000
 s0(8)           : 320.000000
 s0(9)           : 3200.000000
@@ -186,7 +186,7 @@ s0_nb(124)      : 0.000000
 s0_nb(125)      : 0.000000
 s0_nb(126)      : 0.000000
 s0_nb(127)      : 0.000000
-s0_nb(128)      : 197.000000
+s0_nb(128)      : 196.000000
 s0_nb(129)      : 0.000000
 s0_nb(13)       : 0.000000
 s0_nb(130)      : 0.000000
@@ -269,7 +269,7 @@ s0_nb(2)        : 0.000000
 s0_nb(20)       : 0.000000
 s0_nb(200)      : 0.000000
 s0_nb(201)      : 0.000000
-s0_nb(202)      : 34.000000
+s0_nb(202)      : 33.000000
 s0_nb(203)      : 0.000000
 s0_nb(204)      : 0.000000
 s0_nb(205)      : 0.000000
@@ -310,12 +310,12 @@ s0_nb(236)      : 0.000000
 s0_nb(237)      : 0.000000
 s0_nb(238)      : 0.000000
 s0_nb(239)      : 0.000000
-s0_nb(24)       : 0.535150
+s0_nb(24)       : 0.567966
 s0_nb(240)      : 0.000000
 s0_nb(241)      : 0.000000
 s0_nb(242)      : 0.000000
 s0_nb(243)      : 0.000000
-s0_nb(244)      : 501.248014
+s0_nb(244)      : 501.103659
 s0_nb(245)      : 0.000000
 s0_nb(246)      : 0.000000
 s0_nb(247)      : 0.000000
@@ -325,7 +325,7 @@ s0_nb(25)       : 0.000000
 s0_nb(250)      : 0.000000
 s0_nb(251)      : 0.000000
 s0_nb(252)      : 0.000000
-s0_nb(253)      : 550.411942
+s0_nb(253)      : 552.184397
 s0_nb(254)      : 0.000000
 s0_nb(255)      : 0.000000
 s0_nb(256)      : 1920.000000
@@ -341,7 +341,7 @@ s0_nb(264)      : 0.000000
 s0_nb(265)      : 0.000000
 s0_nb(266)      : 0.000000
 s0_nb(267)      : 0.000000
-s0_nb(268)      : 96.588162
+s0_nb(268)      : 98.259186
 s0_nb(269)      : 0.000000
 s0_nb(27)       : 0.000000
 s0_nb(270)      : 0.000000
@@ -459,7 +459,7 @@ x(124)          : 0.000000
 x(125)          : 0.000000
 x(126)          : 0.000000
 x(127)          : 0.000000
-x(128)          : 197.000000
+x(128)          : 196.000000
 x(129)          : 0.000000
 x(13)           : 0.000000
 x(130)          : 0.000000
@@ -542,7 +542,7 @@ x(2)            : 0.000000
 x(20)           : 0.000000
 x(200)          : 0.000000
 x(201)          : 0.000000
-x(202)          : 34.000000
+x(202)          : 33.000000
 x(203)          : 0.000000
 x(204)          : 0.000000
 x(205)          : 0.000000
@@ -651,9 +651,9 @@ x(99)           : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
 
-Upper bound estimate                   : 4036.197447
-Error in estimation                    : 0.001069
-Confidence interval at 95%             : [4034.040282, 4038.354613]
+Upper bound estimate                   : 4037.415843
+Error in estimation                    : 0.001070
+Confidence interval at 95%             : [4035.255108, 4039.576578]
 Number of observations                 : 2000
 
 ------------------------------------------- Average solution ---------------------------------------
@@ -661,7 +661,7 @@ Number of observations                 : 2000
 
 -------------------------------------------- Evaluation --------------------------------------------
 
-Upper bound estimate                   : 4035.226960
-Error in estimation                    : 0.000444
-Confidence interval at 95%             : [4034.330144, 4036.123777]
+Upper bound estimate                   : 4036.571509
+Error in estimation                    : 0.000446
+Confidence interval at 95%             : [4035.671197, 4037.471822]
 Number of observations                 : 2000

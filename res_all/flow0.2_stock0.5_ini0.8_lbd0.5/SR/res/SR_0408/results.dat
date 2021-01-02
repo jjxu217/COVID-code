@@ -40,10 +40,10 @@ First Stage Columns                    : 547
 Algorithm                              : Two-stage Stochastic Decomposition
 Number of iterations                   : 242
 Lower bound estimate                   : 4902.088957
-Total time                             : 5.677581
-Total time to solve master             : 2.311322
-Total time to solve subproblems        : 0.082676
-Total time in argmax procedure         : 0.225512
+Total time                             : 6.395647
+Total time to solve master             : 2.587582
+Total time to solve subproblems        : 0.090556
+Total time in argmax procedure         : 0.262573
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
@@ -62,10 +62,10 @@ Replication-2
 Algorithm                              : Two-stage Stochastic Decomposition
 Number of iterations                   : 298
 Lower bound estimate                   : 4551.011095
-Total time                             : 8.471454
-Total time to solve master             : 3.406999
-Total time to solve subproblems        : 0.104062
-Total time in argmax procedure         : 0.335608
+Total time                             : 8.764598
+Total time to solve master             : 3.553721
+Total time to solve subproblems        : 0.109382
+Total time in argmax procedure         : 0.349704
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------
@@ -84,10 +84,10 @@ Replication-3
 Algorithm                              : Two-stage Stochastic Decomposition
 Number of iterations                   : 303
 Lower bound estimate                   : 4844.439987
-Total time                             : 8.174039
-Total time to solve master             : 3.427027
-Total time to solve subproblems        : 0.102578
-Total time in argmax procedure         : 0.324842
+Total time                             : 8.779566
+Total time to solve master             : 3.635049
+Total time to solve subproblems        : 0.108993
+Total time in argmax procedure         : 0.357976
 Total time in verifying optimality     : 0.000000
 
 -------------------------------------------- Evaluation --------------------------------------------

@@ -85,7 +85,7 @@ for i in range(S):
 model.demand = Param(model.state_set, model.time0_set, within=NonNegativeReals, mutable=True)
 model.demand_k = Param(model.state_set, model.time1_set, model.K_set, within=NonNegativeReals, mutable=True)
 
-model.U = [ceil(flow_bound_ratio * ini_self[flow_mapping_rev[j][0]]) for j in model.flow_set] 
+model.U = [round(flow_bound_ratio * ini_self[flow_mapping_rev[j][0]]) for j in model.flow_set] 
 model.G = [round(stock_bound_ratio * i) for i in ini_self]
 
 # first-stage variables

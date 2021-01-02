@@ -25,7 +25,7 @@ t = 7
 T = 14
 P = 10
 S = 51
-SNS_stock = 0
+#SNS_stock = 0
 
 ###
 lbd = 0.5
@@ -36,7 +36,7 @@ stock_bound_ratio = 0.5
 
 #write to file
 with open(now + '/config.txt', 'w') as f:
-    f.write('lbd={}\n SNS_stock={}\n init_ratio={}\n flow_bound_ratio={}\n stock_bound_ratio={}\n'.format(lbd, SNS_stock, init_ratio, flow_bound_ratio,stock_bound_ratio))
+    f.write('lbd={}\n init_ratio={}\n flow_bound_ratio={}\n stock_bound_ratio={}\n'.format(lbd, init_ratio, flow_bound_ratio,stock_bound_ratio))
 
 
 #flow set
