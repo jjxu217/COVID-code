@@ -7,6 +7,7 @@ from collections import defaultdict
 from pyomo.opt import SolverFactory
 from datetime import timedelta
 from datetime import datetime
+import shutil
 import time
 
 
@@ -23,13 +24,15 @@ first_date = '2020/03/25'
 t = 7
 T = 14
 P = 10
-lbd = 5
 S = 51
-
 SNS_stock = 0
-init_ratio = 0.6
-flow_bound_ratio = 0.20
+
+###
+lbd = 0.5
+init_ratio = 0.5
+flow_bound_ratio = 0.2
 stock_bound_ratio = 0.5
+###
 
 #write to file
 with open(now + '/config.txt', 'w') as f:
@@ -173,3 +176,25 @@ data.to_csv(now + '/' + prev_date.strftime('%m%d') + '.csv')
 for i in range(P):
     date = pd.to_datetime(first_date) + timedelta(i * t)
     solve_model(date)
+
+
+new_first_date = '2020/11/19'
+new_P = 4
+prev_date = pd.to_datetime(new_first_date) - timedelta(t)
+
+old_date = pd.to_datetime(first_date) + timedelta((P-1) * t)
+df = pd.read_csv('{}/{}.csv'.format(now, old_date.strftime('%m%d')), header=0, index_col=0)
+df.to_csv('{}/{}.csv'.format(now, prev_date.strftime('%m%d')))
+
+for i in range(new_P):
+    date = pd.to_datetime(new_first_date) + timedelta(i * t)
+    solve_model(date)
+
+
+param = 'flow{}_stock{}_ini{}_lbd{}'.format(flow_bound_ratio, stock_bound_ratio, init_ratio, lbd)
+if not os.path.exists('../res_all/' + param):
+        os.makedirs('../res_all/' + param)
+source = "{}".format(now)
+destination = '../res_all/' + param 
+shutil.move(source, destination)
+os.rename('../res_all/{}/{}'.format(param, now), '../res_all/{}/{}'.format(param, 'det_no_SNS'))
